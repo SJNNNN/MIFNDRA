@@ -1,6 +1,5 @@
 # MIFNDRA
-RGFMDA: a novel residual graphSAGE-based model with nonlinear adaptive feature fusion and triplet contrastive learning for miRNA-disease association prediction
-
+MIFNDRA: an innovative knowledge-enhanced multimodal fusion and graph learning framework for predicting drug resistance-related ncRNAs
 ## Requirements
   * python==3.7
   * dgl==0.6.1
@@ -12,12 +11,11 @@ RGFMDA: a novel residual graphSAGE-based model with nonlinear adaptive feature f
 
 ## File
 ### data
-  The data files needed to run the model, which contain HMDDv2.0 and HMDDv3.2.
+  The data files needed to run the model.
   * disease semantic similarity matrix 1.txt and disease semantic similarity matrix 2.txt: Two kinds of disease semantic similarity
-  * miRNA functional similarity matrix.txt: MiRNA functional similarity
-  * known disease-miRNA association number.txt:Validated mirNA-disease associations
-  * disease number.txt: Disease id and name
-  * miRNA number.txt: MiRNA id and name
+  * ncRNA_Functional_Similarity_Matrix.txt: MiRNA functional similarity
+  * ncrna_rug_index.txt:Validated ncRNA-drug resistance associations
+
 ### code
   * eval.py: The startup code of the program
   * train.py: Train the model
