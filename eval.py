@@ -1,16 +1,10 @@
 import argparse
-from MIFNDRA_utils import get_data,data_processing
-# from mulitmodel_utils import get_data,data_processing
-# from train import train
+from utils import get_data,data_processing
 import sys
 import os
 import importlib.util
 
-#
-# # 现在可以使用 train2 中的函数
-
-# from mulitmodel_train import train
-from MIFNDRA_train import train
+from train import train
 
 
 # from case_studies import case_study
@@ -38,20 +32,8 @@ def result(args):
     args.disease_number = data['disease_number']
     data_processing(data,args)
     train(data, args)
-    print('################5-Fold Result################')
-    # cv_metrics=[]
-    # sD_metrics=[]
-    # for k in range(10):
-    #     print("...................第{}次五折交叉验证...........".format(k+1))
-    #     cv_metric, sD_metric=train(data,args,k)
-    #     cv_metrics.append(cv_metric)
-    #     sD_metrics.append(sD_metric)
-    #     print('################5-Fold Result################')
-    # cv = np.mean(cv_metrics, axis=0)
-    # sD = np.std(sD_metrics, axis=0)
-    # print_met(cv)
-    # print_met2(sD)
-    # case_study(data,args)
+  
+ 
 
 
 
@@ -79,7 +61,7 @@ parser.add_argument('--early_stopping', type=int, default=200, help='stop')
 parser.add_argument('--dropout', type=float, default=0.2, help='dropout')
 parser.add_argument('--mlp', type=list, default=[64, 1], help='mlp layers')
 parser.add_argument('--neighbor', type=int, default=20, help='neighbor')
-parser.add_argument('--dataset', default='resisant_fin', help='dataset')#HMDD v2.0#resisant_fin
+parser.add_argument('--dataset', default='Dataset', help='dataset')#HMDD v2.0#resisant_fin
 parser.add_argument('--save_score', default='True', help='save_score')
 parser.add_argument('--negative_rate', type=float,default=1.0, help='negative_rate')
 
@@ -91,3 +73,4 @@ args.save_score = True if str(args.save_score) == 'True' else False
 
 
 result(args)
+
