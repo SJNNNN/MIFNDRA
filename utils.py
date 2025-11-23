@@ -322,7 +322,7 @@ def get_data(args):
     data['dsw'] = dsw
     data['d_num'] = 121
     data['m_num'] = 3322
-    data['md'] = np.loadtxt(args.data_dir + 'ncrna_rug_index.txt', dtype=int) - 1#ncrna_rug_index.txt#filtered_ncrna_rug_index.txt
+    data['md'] = np.loadtxt(args.data_dir + 'ncrna_drug_index.txt', dtype=int) - 1#ncrna_rug_index.txt#filtered_ncrna_rug_index.txt
     return data
 
 
@@ -340,6 +340,7 @@ def get_gaussian(adj):
             Gaussian[i, j] = math.exp(-gama * (np.linalg.norm(adj[i] - adj[j]) ** 2))
 
     return Gaussian
+
 
 
 
