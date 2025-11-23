@@ -11,10 +11,10 @@ MIFNDRA: an innovative knowledge-enhanced multimodal fusion and graph learning f
 
 ## File
 ### data
-  The data files needed to run the model.
-  * disease semantic similarity matrix 1.txt and disease semantic similarity matrix 2.txt: Two kinds of disease semantic similarity
-  * ncRNA_Functional_Similarity_Matrix.txt: MiRNA functional similarity
-  * ncrna_rug_index.txt:Validated ncRNA-drug resistance associations
+ You can download the complete dataset from the following link:
+
+[Complete Dataset for predictions](https://drive.google.com/drive/folders/1PMbQN6DdXJAqpMsDjQt4bu2NKQcJg2m-?ths=true)
+
 
 ### code
   * eval.py: The startup code of the program
