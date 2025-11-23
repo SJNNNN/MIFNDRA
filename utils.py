@@ -96,18 +96,17 @@ def data_processing(data, args):
     label = np.array([1] * len(one_index) + [0] * len(zero_index), dtype=int)
     samples = np.concatenate((index, np.expand_dims(label, axis=1)), axis=1)
     # print(samples.shape)
-    #md：从 samples 中提取正样本（标签为 1）的 miRNA 和疾病索引。
-    # md_matrix：根据正样本重新构建关联矩阵，并将其转换为 NumPy 数组
+ 
     md = samples[samples[:, 2] == 1, :2]
     md_matrix = make_adj(md, (args.miRNA_number, args.disease_number))
     md_matrix = md_matrix.numpy()
     # print(md_matrix)
     triplet_samples = []
-    miRNA_disease_map = {}  # 用于存储每个miRNA对应的所有疾病
+    miRNA_disease_map = {}  
 
-    # 首先创建miRNA与其关联疾病的映射
+
     for sample in samples:
-        if sample[2] == 1:  # 仅处理正样本
+        if sample[2] == 1:  
             miRNA_idx = sample[0]
             positive_disease_idx = sample[1]
             if miRNA_idx not in miRNA_disease_map:
@@ -117,7 +116,7 @@ def data_processing(data, args):
     # 生成三元组
     for miRNA_idx, positive_diseases in miRNA_disease_map.items():
         for positive_disease_idx in positive_diseases:
-            # 生成负样本，确保它不等于当前miRNA关联的所有疾病
+      
             negative_disease_idx = random.choice([d for d in range(args.disease_number) if d not in positive_diseases])
             triplet_samples.append([miRNA_idx, positive_disease_idx, negative_disease_idx])
 
@@ -129,7 +128,7 @@ def data_processing(data, args):
     ds = data['dss'] * data['dsw'] + gd * (1 - data['dsw'])  #
 
 
-    # ====== 你的原始部分 ======
+
     m = np.load(args.data_dir + 'SpliceBERTembeddings.npy')
     nc = np.loadtxt(args.data_dir + 'ncRNA_ncRNA_interconnections.txt', dtype=float)
     n = np.load(args.data_dir + 'complete_mol_emb.npy')
@@ -150,7 +149,7 @@ def data_processing(data, args):
 
 
 
-    # ====== 改进后的相关矩阵绘图 ======
+
     def corr_mx(Z):
         C = np.corrcoef(Z, rowvar=False)
         return np.nan_to_num(C, nan=0.0, posinf=0.0, neginf=0.0)
@@ -164,10 +163,9 @@ def data_processing(data, args):
         plt.ylabel("feature index", fontsize=14)
         plt.tight_layout()
 
-        # 保存 300 dpi 图像
         plt.savefig(filename, dpi=300, bbox_inches="tight")
         plt.close()
-        # print(f"图已保存: {filename}")
+     
     #
     def safe_plot(X_raw, X_pca, pca, prefix, k=50):
         print(f"== {prefix} ==")
@@ -183,15 +181,14 @@ def data_processing(data, args):
             return
         k_eff = min(k, valid_idx.size)
 
-        # 原始空间：取前k_eff维
+
         C_raw = corr_mx(X_raw[:, :k_eff])
         plot_corr(C_raw, f"{prefix} Raw correlation", filename=f"result/PCA/{prefix}_Raw_corr.png", k=k_eff)
 
-        # PCA空间：取有效PC的前k_eff维
+
         C_pca = corr_mx(X_pca[:, valid_idx[:k_eff]])
         plot_corr(C_pca, f"{prefix} PCA correlation", filename=f"result/PCA/{prefix}_PCA_corr.png", k=k_eff)
 
-    # ====== 调用 ======
     safe_plot(combined_features1, X_reduced, pca, "ncRNA", k=50)
     safe_plot(combined_features2, Y_reduced, pca, "Drug", k=50)
     #
@@ -220,15 +217,15 @@ def data_processing(data, args):
             return
         k_eff = min(k, valid_idx.size)
 
-        # 原始空间与PCA空间的相关矩阵（只看前 k_eff 维）
+
         C_raw = corr_mx(X_raw[:, :k_eff])
         C_pca = corr_mx(X_pca[:, valid_idx[:k_eff]])
 
-        # 画热图
+
         # plot_corr(C_raw, f"{prefix} Raw correlation", k_eff)
         # plot_corr(C_pca, f"{prefix} PCA correlation", k_eff)
 
-        # ====== 打印数值指标 ======
+
         stats_raw = offdiag_stats(C_raw)
         stats_pca = offdiag_stats(C_pca)
 
@@ -343,5 +340,6 @@ def get_gaussian(adj):
             Gaussian[i, j] = math.exp(-gama * (np.linalg.norm(adj[i] - adj[j]) ** 2))
 
     return Gaussian
+
 
 
