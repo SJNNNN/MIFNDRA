@@ -18,9 +18,9 @@ MIFNDRA: an innovative knowledge-enhanced multimodal fusion and graph learning f
 
 ### code
   * eval.py: The startup code of the program
-  * train.py: Train the model
+  * MIFNDRA_train.py: Train the model
   * MIFNDRA.py: Structure of the model
-  * utils.py: Methods of data processing
+  * MIFNDRA_utils.py: Methods of data processing
  
 ## Usage
   * download code and data
