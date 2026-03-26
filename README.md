@@ -1,13 +1,13 @@
 # MIFNDRA
 MIFNDRA: an innovative knowledge-enhanced multimodal fusion and graph learning framework for predicting drug resistance-related ncRNAs
 ## Requirements
-  * python==3.8.19 
-  * dgl==2.3.0+cu121 
-  * networkx==3.1  
-  * numpy==1.24.4  
-  * scikit-learn==1.3.2 
+  * python=3.8.19 
+  * dgl=2.3.0+cu121 
+  * networkx=3.1  
+  * numpy=1.24.4  
+  * scikit-learn=1.3.2 
   * pytorch= 2.2.2 
-  * tqdm==4.67.1 
+  * tqdm=4.67.1 
 
 ## File
 ### data
